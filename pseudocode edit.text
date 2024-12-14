@@ -1,0 +1,40 @@
+EDIT PAGINA EINDOPDRACHT PSEUDO CODE
+
+INPUT: id (artist ID)
+
+IF id is not provided THEN
+    DISPLAY error message "ID parameter is missing."
+    STOP
+
+CONNECT to database
+
+PREPARE query to select artist data from database
+EXECUTE query with id as parameter
+STORE result in artist variable
+
+IF artist is not found THEN
+    DISPLAY error message "Artist not found."
+    STOP
+
+INITIALIZE variables for form data and errors
+
+IF form has been submitted THEN
+    GET form data (name, genre, album count)
+    VALIDATE form data
+        IF name is empty THEN
+            ADD error message "De naam is verplicht."
+        IF genre is empty THEN
+            ADD error message "Het genre is verplicht."
+        IF album count is empty THEN
+            ADD error message "Het aantal albums is verplicht."
+        ELSE IF album count is not a number THEN
+            ADD error message "Het aantal albums moet een getal zijn."
+
+    IF errors empty, so no errors THEN
+        PREPARE query to update artist data in database
+        EXECUTE query with form data and id as parameters
+        IF query is successful THEN
+            CLOSE database connection
+            REDIRECT to index.php
+        ELSE
+            DISPLAY error message
